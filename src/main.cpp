@@ -64,15 +64,15 @@ void setup(void) {
    //  * any previous self calibration values.
    //  * Reference value stored in non-volatile memory of SCD30.
    //  */
-   // delay(2 * 60 * 1000);
-   // if (!scd30.forceRecalibrationWithReference(420))
-   // {
-   //   Serial.println("ERROR! Failed to force recalibration with reference");
-   //   while (1) {delay(10);}
-   // }
-   // Serial.print("Forced Recalibration reference: ");
-   // Serial.print(scd30.getForcedCalibrationReference());
-   // Serial.println(" ppm");
+   delay(2 * 60 * 1000);
+   if (!scd30.forceRecalibrationWithReference(420))
+   {
+     Serial.println("ERROR! Failed to force recalibration with reference");
+     while (1) {delay(10);}
+   }
+   Serial.print("Forced Recalibration reference: ");
+   Serial.print(scd30.getForcedCalibrationReference());
+   Serial.println(" ppm");
 
 
    // /*** Enable or disable automatic self calibration (ASC).
