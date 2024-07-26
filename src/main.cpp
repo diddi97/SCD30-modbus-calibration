@@ -3,7 +3,6 @@
 #include <scd30_modbus.h>
 
 SCD30_Modbus scd30;
-
 void setup(void) {
 
    Serial.begin(115200);
@@ -17,7 +16,7 @@ void setup(void) {
    Serial.println("SCD30 Found!");
 
    // /*** Adjust the rate at which measurements are taken, from 2-1800 seconds */
-   if (!scd30.setMeasurementInterval(20)){
+   if (!scd30.setMeasurementInterval(3)){
       Serial.println("ERROR! Failed to set measurement interval");
       while(1){ delay(10);}
    }
@@ -64,7 +63,7 @@ void setup(void) {
    //  * any previous self calibration values.
    //  * Reference value stored in non-volatile memory of SCD30.
    //  */
-   delay(2 * 60 * 1000);
+   delay(2000);
    if (!scd30.forceRecalibrationWithReference(420))
    {
      Serial.println("ERROR! Failed to force recalibration with reference");
@@ -73,7 +72,7 @@ void setup(void) {
    Serial.print("Forced Recalibration reference: ");
    Serial.print(scd30.getForcedCalibrationReference());
    Serial.println(" ppm");
-
+   delay(2000);
 
    // /*** Enable or disable automatic self calibration (ASC).
    //  * Parameter stored in non-volatile memory of SCD30.
@@ -96,7 +95,6 @@ void setup(void) {
       Serial.println();
    }
 }
-
 
 void loop() {
 
@@ -124,5 +122,5 @@ void loop() {
       Serial.println("");
   }
 
-  delay(2000);
+  delay(500);
 }
